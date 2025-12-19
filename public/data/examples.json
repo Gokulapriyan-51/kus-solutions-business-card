@@ -26,17 +26,13 @@
     "title": "Scalable Backend API Platform",
     "text": "Built and optimized secure RESTful APIs using Node.js and Express.js for high-volume data transactions. Implemented JWT-based authentication, database optimization techniques, and modular service architecture.",
     "tags": ["Node.js", "Express.js", "PostgreSQL", "JWT", "Microservices"],
-    "images": [
-      "/assets/projects/api-platform.png"
-    ]
+    "images": ["/assets/projects/api-platform.png"]
   },
   {
     "preview": "/assets/projects/web-apps.png",
     "title": "Full Stack Web Applications",
     "text": "Developed multiple responsive web applications using React.js and Vue.js with clean UI and optimized backend services. Focused on performance, maintainability, and real-world business use cases.",
     "tags": ["React.js", "Vue.js", "HTML", "CSS", "JavaScript", "SQL"],
-    "images": [
-      "/assets/projects/web-apps.png"
-    ]
+    "images": ["/assets/projects/web-apps.png"]
   }
 ]

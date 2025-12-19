@@ -35,25 +35,25 @@ export default function ImageBanner({ className }: { className?: string }) {
       <div className={`absolute inset-0 flex items-center justify-center ${className}`}>
         <Image
           ref={image2Ref}
-          src="/assets/pngwing.png"
-          alt="banner"
+          src='/assets/pngwing.png'
+          alt='banner'
           width={1000}
           height={1000}
           priority
-          className="h-full w-full object-contain opacity-0"
+          className='h-full w-full object-contain opacity-0'
         />
       </div>
 
       <div className={`absolute inset-0 flex items-center justify-center ${className}`}>
         <Image
           ref={image1Ref}
-          src="/assets/img3.png"
-          alt="banner"
+          src='/assets/img3.png'
+          alt='banner'
           width={1000}
           height={1000}
           priority
-          className="h-full w-full object-contain"
-        />  
+          className='h-full w-full object-contain'
+        />
       </div>
     </>
   );

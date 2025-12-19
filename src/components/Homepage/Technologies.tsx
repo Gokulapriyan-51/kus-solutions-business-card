@@ -7,7 +7,7 @@ import OrderNowButton from '../buttons/OrderNowButton';
 const { logos, technologiesText } = technologies;
 
 const config = {
-  circlesNum: 21, 
+  circlesNum: 21,
   parallaxIntensity: 70
 };
 

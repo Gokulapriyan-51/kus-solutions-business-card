@@ -10,9 +10,9 @@ import {
   PiGithubLogo,
   PiInstagramLogo,
   PiLinkedinLogo,
-  PiPhoneBold,
-  PiTelegramLogo,
-  PiTiktokLogo
+  PiPhoneBold
+  // PiTelegramLogo,
+  // PiTiktokLogo
 } from 'react-icons/pi';
 
 interface HomepageFooterProps {
@@ -115,7 +115,7 @@ export default function HomepageFooter(props: HomepageFooterProps) {
             }}
             className={`cursor-pointer  text-secondary hover:text-primary`}
           >
-            About 
+            About
           </div>
         </div>
         <div className='flex w-full flex-col items-center justify-center md:items-end'>
@@ -190,11 +190,11 @@ export default function HomepageFooter(props: HomepageFooterProps) {
               width={50}
               height={50}
               alt='logo'
-              className='h-16 w-auto md:h-18 md:w-auto'
+              className='md:h-18 h-16 w-auto md:w-auto'
               src='/assets/IMG_small.png'
             />
             <div className='font-coiny text-lg leading-5 tracking-wider text-secondary md:text-xl md:leading-6'>
-              <div className='whitespace-nowrap text-primary'>{"Gokulapriyan"}</div>
+              <div className='whitespace-nowrap text-primary'>{'Gokulapriyan'}</div>
               <div className='whitespace-nowrap'>Protfolio</div>
             </div>
           </div>

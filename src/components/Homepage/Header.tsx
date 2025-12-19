@@ -1,7 +1,7 @@
 import { Navbar } from 'flowbite-react';
 import { gsap } from 'gsap';
 import { ScrollToPlugin } from 'gsap/all';
-import Image from 'next/image';
+// import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import ContactUsButton from '../buttons/ContactUsButton';
 export default function HomepageHeader() {
@@ -66,7 +66,7 @@ export default function HomepageHeader() {
            src='/assets/IMG_small.png'
           /> */}
           <div className='font-coiny text-lg leading-5 tracking-wider text-secondary md:text-xl md:leading-6'>
-            <div className='whitespace-nowrap text-primary'>{"Gokulapriyan"}</div>
+            <div className='whitespace-nowrap text-primary'>{'Gokulapriyan'}</div>
             <div className='whitespace-nowrap'>Protfolio</div>
           </div>
         </Navbar.Brand>
@@ -109,7 +109,7 @@ export default function HomepageHeader() {
             }}
             className={`cursor-pointer p-2 text-xl text-secondary hover:text-primary md:p-0 md:text-base `}
           >
-            About 
+            About
           </div>
         </Navbar.Collapse>
       </Navbar>
