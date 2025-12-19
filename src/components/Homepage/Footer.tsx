@@ -191,7 +191,7 @@ export default function HomepageFooter(props: HomepageFooterProps) {
               height={50}
               alt='logo'
               className='h-16 w-auto md:h-18 md:w-auto'
-              src='/assets/Karmen pnf.jpg'
+              src='/assets/IMG_small.png'
             />
             <div className='font-coiny text-lg leading-5 tracking-wider text-secondary md:text-xl md:leading-6'>
               <div className='whitespace-nowrap text-primary'>{"Gokulapriyan"}</div>

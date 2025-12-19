@@ -1,136 +1,125 @@
 import examples from '@/data/examples.json';
-import { Carousel } from 'flowbite-react';
+import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
-import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
-import { PiControlBold } from 'react-icons/pi';
+import {
+  FiCode,
+  FiDatabase,
+  FiCpu,
+  FiServer,
+  FiLayers,
+  FiCloud,
+} from 'react-icons/fi';
+import { MdRocketLaunch } from 'react-icons/md';
 
-interface ExamplesProps {
-  className?: string;
-}
-
-interface ExampleCardProps {
-  className?: string;
-  preview: string;
-  images: string[];
-  tags?: string[];
-  title: string;
-  text: string;
-}
-
-const CarouselControl = ({ className }: { className: string }) => {
-  return (
-    <div className={`text-5xl text-primary ${className}`}>
-      <PiControlBold />
-    </div>
-  );
+const techIcons: Record<string, JSX.Element> = {
+  'node.js': <FiServer className="text-green-400" />,
+  'nestjs': <FiServer className="text-red-400" />,
+  'react': <FiCode className="text-cyan-400" />,
+  'vue.js': <FiLayers className="text-green-400" />,
+  'typescript': <FiCode className="text-blue-400" />,
+  'mongodb': <FiDatabase className="text-green-400" />,
+  'postgresql': <FiDatabase className="text-blue-400" />,
+  'docker': <FiCpu className="text-sky-400" />,
+  'mqtt': <FiCpu className="text-lime-400" />,
+  'auth0': <FiCloud className="text-yellow-400" />,
+  'jwt': <FiCloud className="text-pink-400" />,
 };
 
-const ExampleCard = (props: ExampleCardProps) => {
-  const { className, tags, preview, images, title, text } = props;
-  const [hover, setHover] = useState(false);
-  return (
-    <div
-      className={`${className} relative flex w-full flex-col items-center justify-center gap-5 text-secondary md:h-[600px] md:w-[600px]`}
-    >
-      <div
-        onMouseEnter={() => {
-          setHover(true);
-        }}
-        onMouseLeave={() => {
-          setHover(false);
-        }}
-        className={`${
-          hover ? 'from-primary/80' : 'from-primary/40 '
-        } relative flex h-[250px] min-h-[180px] w-full items-center justify-center overflow-hidden rounded-3xl bg-gradient-to-br  object-cover shadow-tl shadow-primary transition-colors delay-1000 md:h-[400px] md:min-h-[200px]`}
-      >
-        <Carousel
-          leftControl={<CarouselControl className='-rotate-90' />}
-          rightControl={<CarouselControl className='rotate-90' />}
-          slide={false}
-          className='relative h-full w-full'
-        >
-          <div className='relative h-full w-full'>
-            <Image
-              alt='example-image'
-              src={preview}
-              width={500}
-              height={500}
-              className={`${
-                hover ? '-rotate-6' : ''
-              } absolute right-0 top-10 h-auto w-4/5 -rotate-12 transform object-contain shadow-repeat shadow-primary/20 duration-200`}
-            />
-          </div>
-          {images.map((image, index) => (
-            <div key={index} className='relative h-full w-full'>
-              <Image
-                alt='example-image'
-                src={image}
-                width={500}
-                height={500}
-                className={`absolute top-0 h-auto w-full  object-contain`}
-              />
-            </div>
-          ))}
-        </Carousel>
-      </div>
-      <div className='flex flex-wrap gap-2 self-start'>
-        {tags?.map((tag, index) => (
-          <div key={index} className='rounded-xl bg-primary/40 p-2'>
-            {tag}
-          </div>
-        ))}
-      </div>
-      <div className='w-full text-left font-dongle text-4xl'>{title}</div>
-      <div className='line-clamp-3 w-full break-words text-justify font-dongle text-2xl text-gray-300'>
-        {text}
-      </div>
-      <div className='block w-1/2 border-b-4 border-primary md:hidden'></div>
-    </div>
-  );
-};
+const getTechIcon = (tech: string) =>
+  techIcons[tech.toLowerCase()] || <FiCode className="text-gray-400" />;
 
-export default function HomepageExamples(props: ExamplesProps) {
-  const { className } = props;
-  const bgTextRef = useRef(null);
+export default function HomepageExamples() {
+  const ref = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    gsap.to(bgTextRef.current, {
-      yPercent: -100,
-      duration: 5,
-      ease: 'none',
+    gsap.from('.project-card', {
+      y: 60,
+      opacity: 0,
+      stagger: 0.15,
+      duration: 0.9,
+      ease: 'power3.out',
       scrollTrigger: {
-        trigger: bgTextRef.current,
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: true
-      }
+        trigger: ref.current,
+        start: 'top 80%',
+      },
     });
   }, []);
+
   return (
-    <div
-      id='examples'
-      className={`${className} relative flex h-full w-full flex-col items-center justify-center gap-10 p-5 md:p-10`}
+    <section
+      id="projects"
+      ref={ref}
+      className="relative isolate z-50 bg-[#0b0f19] py-24"
     >
-      <div className='spotlight spotlight-left'></div>
-      <div className='font-dongle text-5xl  uppercase text-secondary'>Projects we handle</div>
-      <div
-        ref={bgTextRef}
-        className='text-shadow absolute z-0 hidden -rotate-90 transform text-start text-[80px] uppercase tracking-wider  text-background brightness-50  lg:block lg:text-[80px] '
-      >
-        featured projects
+      {/* Subtle glow */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-1/4 top-1/4 h-96 w-96 bg-primary/10 blur-3xl rounded-full" />
+        <div className="absolute right-1/4 bottom-1/4 h-96 w-96 bg-primary/10 blur-3xl rounded-full" />
       </div>
-      <div className='z-30 flex h-full w-full flex-wrap items-center justify-around gap-10'>
-        {examples.map((example, index) => (
-          <ExampleCard
-            preview={example.preview}
-            images={example.images}
-            text={example.text}
-            key={index}
-            title={example.title}
-            tags={example.tags}
-          />
-        ))}
+
+      <div className="relative mx-auto max-w-7xl px-6">
+        {/* Header */}
+        <div className="mb-16 text-center">
+          <span className="inline-flex items-center gap-2 rounded-xl border border-primary/30 bg-primary/10 px-6 py-2 text-sm font-semibold text-primary">
+            <MdRocketLaunch />
+            Featured Projects
+          </span>
+
+          <h2 className="mt-6 text-4xl md:text-5xl font-extrabold text-white">
+            Technical Portfolio
+          </h2>
+
+          <p className="mx-auto mt-4 max-w-3xl text-gray-400">
+            Enterprise-grade systems built with scalability, security, and performance in mind.
+          </p>
+        </div>
+
+        {/* Grid */}
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {examples
+            .filter(p => p.title && p.text)
+            .map((project, index) => (
+              <div
+                key={index}
+                className="project-card relative flex h-full flex-col rounded-2xl border border-gray-700/60 bg-gradient-to-br from-gray-800 to-gray-900 p-6 shadow-xl transition-all duration-300 hover:-translate-y-2 hover:border-primary/50"
+              >
+                {/* Index */}
+                <div className="absolute -top-4 -left-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary-dark font-bold text-white shadow-lg">
+                  #{index + 1}
+                </div>
+
+                {/* Title */}
+                <h3 className="mb-4 text-xl font-bold text-white">
+                  {project.title}
+                </h3>
+
+                {/* Description */}
+                <p className="mb-6 flex-1 text-sm leading-relaxed text-gray-300">
+                  {project.text}
+                </p>
+
+                {/* Tech stack */}
+                <div>
+                  <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-400">
+                    Tech Stack
+                  </p>
+
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags?.map((tag: string, i: number) => (
+                      <span
+                        key={i}
+                        className="flex items-center gap-2 rounded-lg border border-gray-700 bg-gray-800/70 px-3 py-1.5 text-xs text-gray-200"
+                      >
+                        {getTechIcon(tag)}
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
