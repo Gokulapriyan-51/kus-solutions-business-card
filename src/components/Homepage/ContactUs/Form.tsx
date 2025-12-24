@@ -69,50 +69,6 @@ export default function Form({ onChange, onSend }: FormProps) {
     } as unknown as ChangeEvent<HTMLInputElement>);
   };
 
-  const handleSendInternal = async () => {
-    if (!validateForm()) return;
-
-    const web3FormsURL = 'https://api.web3forms.com/submit';
-    const accessKey = '88de83e1-4987-4cef-a60b-2656f86cec49';
-
-    const submissionData = {
-      access_key: accessKey,
-      name: formData.fullName,
-      email: formData.email,
-      phone: formData.phone,
-      company: formData.company,
-      message: formData.text
-    };
-
-    try {
-      const response = await fetch(web3FormsURL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json'
-        },
-        body: JSON.stringify(submissionData)
-      });
-
-      const result = await response.json();
-
-      if (result.success) {
-        alert('Form submitted successfully!');
-        setFormData({
-          fullName: '',
-          email: '',
-          phone: '',
-          company: '',
-          text: ''
-        });
-      } else {
-        alert('Error submitting form.');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('Something went wrong!');
-    }
-  };
 
   return (
     <div className='flex w-full animate-appear flex-col items-center justify-center gap-5 rounded-3xl bg-gradient-to-br from-primary/30 p-5 py-14 caret-primary md:w-3/4 md:shadow-blblur md:shadow-primary/50 lg:w-3/6'>
