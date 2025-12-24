@@ -1,5 +1,5 @@
 import checkContactData, { ContactUsFormErrors } from '@/lib/contactFormValidation';
-import emailjs from '@emailjs/browser';
+// import emailjs from '@emailjs/browser';
 import { ChangeEvent, useState } from 'react';
 import Failure from './Failure';
 import Form from './Form';
@@ -35,54 +35,54 @@ export default function ContactUsForm(props: ContactUsFormProps) {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
- const onSend = async () => {
-  const errors = checkContactData(formData);
+  const onSend = async () => {
+    const errors = checkContactData(formData);
 
-  if (errors) {
-    setFormErrors(errors);
-    return;
-  }
+    if (errors) {
+      setFormErrors(errors);
+      return;
+    }
 
-  setShowForm(false);
-  setLoading(true);
+    setShowForm(false);
+    setLoading(true);
 
-  const web3FormsURL = 'https://api.web3forms.com/submit';
-  const accessKey = '88de83e1-4987-4cef-a60b-2656f86cec49';
+    const web3FormsURL = 'https://api.web3forms.com/submit';
+    const accessKey = '88de83e1-4987-4cef-a60b-2656f86cec49';
 
-  const submissionData = {
-    access_key: accessKey,
-    name: formData.fullName,
-    email: formData.email,
-    phone: formData.phone,
-    company: formData.company,
-    message: formData.text
-  };
+    const submissionData = {
+      access_key: accessKey,
+      name: formData.fullName,
+      email: formData.email,
+      phone: formData.phone,
+      company: formData.company,
+      message: formData.text
+    };
 
-  try {
-    const response = await fetch(web3FormsURL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
-      },
-      body: JSON.stringify(submissionData)
-    });
+    try {
+      const response = await fetch(web3FormsURL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify(submissionData)
+      });
 
-    const result = await response.json();
+      const result = await response.json();
 
-    setLoading(false);
+      setLoading(false);
 
-    if (result.success) {
-      setIsSuccess(true);
-    } else {
+      if (result.success) {
+        setIsSuccess(true);
+      } else {
+        setIsSuccess(false);
+      }
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
       setIsSuccess(false);
     }
-  } catch (error) {
-    console.error(error);
-    setLoading(false);
-    setIsSuccess(false);
-  }
-};
+  };
 
   return (
     <div
